@@ -1,0 +1,83 @@
+
+
+.container{
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    color: #363636;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.navBar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px 0px;
+}
+
+.line{
+    width: 100vw;
+    height: 3px;
+    background-color: black;
+}
+
+.homeBG{
+    background: url('../assets/sfbg.jpg');
+    height: 100vh;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.homeBG:hover{
+    background: linear-gradient(rgba(0,0,0, 0.25), rgba(0,0,0, .25)), url('../assets/sfbg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: black;
+}
+
+
+.minMaxClose{
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 55pt;
+    background-color: black;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-app-region: drag;
+}
+
+.minMaxCloseIcons{
+    font-size: 16pt;
+    color: gray;
+    margin-left: 15px;
+    -webkit-app-region: no-drag;
+}
+
+.minMaxCloseIcons:hover{
+    background-color: white;
+    cursor: pointer;
+}
+
+.scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.scroller::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background: #DBD3C9;
+    border-radius: 30px;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background-color: black;
+}
+  

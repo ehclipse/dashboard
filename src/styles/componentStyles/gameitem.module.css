@@ -1,0 +1,23 @@
+
+.body{
+    height: 30vh; /**200px x 300px**/
+    width: 30vw;
+    position: absolute;
+    z-index: 10;
+}
+
+.gameitem{
+    margin: 0.5rem;
+    height: 30vh; /**200px x 300px**/
+    width: 30vw;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+
+
+.body:hover{
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
