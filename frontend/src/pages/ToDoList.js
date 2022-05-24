@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/todolist.module.css';
 import {VscDiffAdded} from 'react-icons/vsc';
 import {BiArrowBack} from 'react-icons/bi';
@@ -15,31 +15,64 @@ const ToDoList = () => {
 
 
     // useEffect() queries the data
+    useEffect(() => {
+      fetch('http://localhost:3001/tasks', {
+          method: 'GET'
+      })
+        .then(response => response.json())
+        .then(queriedTasks => {
+            setTasks(queriedTasks);
+            console.log(queriedTasks)
+        })
+    }, [toggleAdd])
+    
 
 
     const taskFormHandler = (e) => {
         e.preventDefault();
+
+         // Send to Database
+         fetch('http://localhost:3001/tasks', {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                taskName: taskName,
+                taskDesc: taskDesc,
+                taskDate: taskDate
+            })
+        }).then((res) => {
+            console.log({
+                res
+            })
+        })
+
         // Save to array
-        setTasks([...tasks, {
+       /* setTasks([...tasks, {
             taskName,
             taskDesc,
             taskDate
-        }]);
+        }]);*/
 
         // resets form
         settaskName('');
         settaskDesc('');
         settaskDate('');
 
-        // Send to Database
+       
     }
     
 
     const deleteTask = (deletedTask) =>{
         // Delete task from array
         setTasks(tasks.filter((task) => {return task.taskName !== deletedTask.taskName && task.taskDesc !== deletedTask.taskDesc && task.taskDate !==  deletedTask.taskDate}))
-        
+
         // Delete task from database
+        fetch(`http://localhost:3001/tasks/${deletedTask._id}`, {
+          method: 'DELETE'
+        })
+            .then(res => {
+                console.log(res)
+            })
 
     }
 
@@ -51,7 +84,7 @@ const ToDoList = () => {
                 !toggleAdd && 
                 <div className={styles.tasks}>
                     {
-                        tasks.map((task) => {
+                        tasks?.map((task) => {
                            return <Task task={task} key={uuidv4()} deleteTask={deleteTask}/>
                         })
                     }
