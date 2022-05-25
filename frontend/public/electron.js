@@ -54,7 +54,7 @@ function createWindow () {
 
 
   // Open the DevTools.
-  window.webContents.openDevTools()
+  //window.webContents.openDevTools()
 }
 
 const createTray = () => {

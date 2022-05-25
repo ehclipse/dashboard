@@ -16,7 +16,11 @@ const ToDoList = () => {
 
     // useEffect() queries the data
     useEffect(() => {
-      fetch('http://localhost:3001/tasks', {
+      var date = new Date();
+      var month = date.getUTCMonth() + 1;
+      var day = date.getUTCDate();
+      var year = date.getUTCFullYear();
+      fetch(`https://btbrian-dashboard.herokuapp.com/tasks/lte/${year + "-" + month.toString().padStart(2, '0') + "-" + day}`, {
           method: 'GET'
       })
         .then(response => response.json())
@@ -32,7 +36,7 @@ const ToDoList = () => {
         e.preventDefault();
 
          // Send to Database
-         fetch('http://localhost:3001/tasks', {
+         fetch('https://btbrian-dashboard.herokuapp.com/tasks', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -67,7 +71,7 @@ const ToDoList = () => {
         setTasks(tasks.filter((task) => {return task.taskName !== deletedTask.taskName && task.taskDesc !== deletedTask.taskDesc && task.taskDate !==  deletedTask.taskDate}))
 
         // Delete task from database
-        fetch(`http://localhost:3001/tasks/${deletedTask._id}`, {
+        fetch(`https://btbrian-dashboard.herokuapp.com/tasks/${deletedTask._id}`, {
           method: 'DELETE'
         })
             .then(res => {
@@ -88,6 +92,13 @@ const ToDoList = () => {
                            return <Task task={task} key={uuidv4()} deleteTask={deleteTask}/>
                         })
                     }
+                </div>
+            }
+
+            {
+                !toggleAdd && tasks.length === 0 &&
+                <div className={styles.noTask}>
+                    <p>There are no more tasks left for today!! 🥳</p>
                 </div>
             }
 
@@ -122,11 +133,6 @@ const ToDoList = () => {
 export default ToDoList;
 
 
-// Automatically get a list of things to do today (mongoDB stuff)
 
-// If next day and haven't finished task from previous day, add them to current day at the top
-// -- Display today and previous days basically
 // Button to preview list for next day (bonus)
 
-
-// Make X on task

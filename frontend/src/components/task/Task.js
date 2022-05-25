@@ -6,6 +6,7 @@ const Task = ({task, deleteTask}) => {
         <div className={styles.container}>
             <AiOutlineDelete className={styles.icon} onClick={() => {deleteTask(task)}}/>
             <h2>{task.taskName}</h2>
+            <p>{task.taskDate}</p>
             <p>{task.taskDesc}</p>
         </div>
      );

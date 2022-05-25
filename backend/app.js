@@ -48,6 +48,19 @@ app.get('/tasks', (req, res) => {
 
 })
 
+app.get('/tasks/lte/:date', (req, res) => {
+    let tasks = [];
+    db.collection('tasks')
+        .find({taskDate: {$lte: req.params.date}})
+        .forEach(task => tasks.push(task)) // asynch cursor method
+        .then(() => {
+            res.status(200).json(tasks);
+        })
+        .catch((err) => {
+            res.status(500).json({error: 'Could not fetch the documents'})
+        })
+})
+
 app.get('/tasks/:date', (req, res) => {
     let tasks = [];
     db.collection('tasks')
@@ -60,7 +73,6 @@ app.get('/tasks/:date', (req, res) => {
             res.status(500).json({error: 'Could not fetch the documents'})
         })
 })
-
 
 /*
 app.get('/tasks/:id', (req, res) => {
