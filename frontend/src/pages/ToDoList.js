@@ -20,7 +20,7 @@ const ToDoList = () => {
       var month = date.getUTCMonth() + 1;
       var day = date.getUTCDate();
       var year = date.getUTCFullYear();
-      fetch(`https://btbrian-dashboard.herokuapp.com/tasks/lte/${year + "-" + month.toString().padStart(2, '0') + "-" + day}`, {
+      fetch(`https://btbrian-dashboard.herokuapp.com/tasks/lte/${year + "-" + month.toString().padStart(2, '0') + "-" + day.toString().padStart(2, '0')}`, {
           method: 'GET'
       })
         .then(response => response.json())
